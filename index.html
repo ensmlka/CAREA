@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carea Pizza | Lezzetin Modern Hali</title>
+    <!-- PREMIUM GOOGLE FONTLARI ENTEGRASYONU -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- GENEL AYARLAR & MODERN RENK PALETİ --- */
+        :root {
+            --bg-dark: #0f0f12;
+            --bg-card: #18181c;
+            --primary: #ff4757;
+            --primary-hover: #ff6b81;
+            --accent: #ffa502;
+            --text-main: #ffffff;
+            --text-muted: #a4b0be;
+            --border-color: #2f3542;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .logo, .pizza-price, .total-row, .contact-title {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER & NAVIGASYON --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(24, 24, 28, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-btn {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.2);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* --- HERO (GİRİŞ) ALANI --- */
+        .hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            margin-top: 80px;
+            background: linear-gradient(135deg, #18181c 0%, #0f0f12 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 58px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+        }
+
+        .hero-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .hero-image-container {
+            z-index: 2;
+        }
+
+        .hero-image {
+            width: 460px;
+            height: 460px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid var(--bg-card);
+            transition: transform 0.5s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .hero-image:hover {
+            transform: rotate(15deg);
+        }
+
+        /* --- MENÜ / PİZZA KARTLARI (GRID SİSTEMİ) --- */
+        .menu-section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .pizza-card {
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pizza-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 71, 87, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 71, 87, 0.08);
+        }
+
+        .pizza-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .pizza-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .pizza-card:hover .pizza-img {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        .pizza-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background-color: var(--accent);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 5;
+        }
+
+        .pizza-info {
+            padding: 28px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pizza-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .pizza-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .pizza-price {
+            color: var(--accent);
+            font-size: 22px;
+            font-weight: 800;
+            transition: all 0.2s ease;
+        }
+
+        .pizza-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* --- SEÇENEKLER & BOYUT SEÇİMİ --- */
+        .pizza-options {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            margin-top: auto;
+        }
+
+        .size-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .size-option {
+            flex: 1;
+            text-align: center;
+        }
+
+        .size-option input {
+            display: none;
+        }
+
+        .size-option label {
+            display: block;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            padding: 10px 5px;
+            border-radius: 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .size-option label:hover {
+            border-color: rgba(255, 71, 87, 0.3);
+            color: var(--text-main);
+        }
+
+        .size-option input:checked + label {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
+        }
+
+        /* --- ADET & SİPARİŞ SATIRI --- */
+        .qty-order-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .qty-input {
+            width: 35px;
+            border: none;
+            background: none;
+            color: var(--text-main);
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .add-to-cart-btn {
+            flex-grow: 1;
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.2);
+        }
+
+        .add-to-cart-btn.added {
+            background-color: #2ed573;
+            border-color: #2ed573;
+            color: white;
+        }
+
+        /* --- SİPARİŞ ÖZETİ SEPET ALANI --- */
+        .order-summary-section {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 80px 8%;
+        }
+
+        .summary-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: space-between;
+        }
+
+        .summary-box {
+            flex: 1.3;
+            min-width: 320px;
+        }
+
+        .summary-box.checkout-side {
+            flex: 0.8;
+        }
+
+        .summary-box h3 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 12px;
+            display: inline-block;
+            letter-spacing: -0.5px;
+        }
+
+        .order-list {
+            list-style: none;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .order-item-details h4 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .order-item-details p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .order-item-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .order-item-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .remove-item-btn:hover {
+            color: var(--primary-hover);
+        }
+
+        .checkout-box {
+            background-color: var(--bg-dark);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .complete-order-btn {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .complete-order-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.3);
+        }
+
+        /* --- İLETİŞİM BÖLÜMÜ (YENİ EKLENEN GRID YAPISI) --- */
+        .contact-section {
+            padding: 90px 8%;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #121216 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .contact-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            border-radius: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+        }
+
+        .contact-card h3 {
+            font-size: 22px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p strong {
+            color: var(--text-main);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+            font-weight: 300;
+        }
+
+        /* --- RESPONSIVE TASARIM --- */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                height: auto;
+                padding: 140px 8% 60px 8%;
+            }
+            .hero-image {
+                width: 320px;
+                height: 320px;
+                margin-top: 50px;
+            }
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            .summary-container, .contact-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">CAREA<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Anasayfa</a></li>
+                <li><a href="#menu">Pizzalarımız</a></li>
+                <li><a href="#orders">Siparişlerim</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </nav>
+        <div class="nav-buttons">
+            <button class="cart-btn" onclick="document.getElementById('orders').scrollIntoView();">
+                🛒 Sepetim
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Gerçek İtalyan Lezzeti: <span>Carea Pizza</span></h1>
+            <p>En taze malzemelerle, taş fırında odun ateşiyle pişen çıtır çıtır pizzalar modern sunumlarla kapınızda.</p>
+            <a href="#menu" class="hero-btn">Menüyü Keşfet</a>
+        </div>
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop" alt="Carea Pizza Ana Görsel" class="hero-image">
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section class="menu-section" id="menu">
+        <div class="section-title">
+            <h2>Özel Reçeteli Pizzalarımız</h2>
+            <p>Boyutunu seçtiğiniz an fiyat güncellenir. Premium malzemelerle hazırlanmış 6 şef imzalı lezzet.</p>
+        </div>
+
+        <div class="menu-grid">
+            
+            <!-- PIZZA 1: MARGHERITA -->
+            <div class="pizza-card">
+                <div class="pizza-img-wrapper">
+                    <span class="pizza-badge">Klasik</span>
+                    <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=500&auto=format&fit=crop" alt="Margherita" class="pizza-img">
+                </div>
+                <div class="pizza-info">
+                    <div>
+                        <div class="pizza-title-row">
+                            <h3 class="pizza-title">Margherita</h3>
+                            <span class="pizza-price">180 TL</span>
+                        </div>
+                        <p class="pizza-desc">Özel Carea domates sosu, taze mozzarella, fesleğen yaprakları ve sızma zeytinyağı.</p>
+                    </div>
+                    <div class="pizza-options">
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="p1-kucuk" name="p1-boyut" value="Küçük" data-price="180" checked>
+                                <label for="p1-kucuk">Küçük</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p1-orta" name="p1-boyut" value="Orta" data-price="220">
+                                <label for="p1-orta">Orta</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p1-buyuk" name="p1-boyut" value="Büyük" data-price="260">
+                                <label for="p1-buyuk">Büyük</label>
+                            </div>
+                        </div>
+                        <div class="qty-order-row">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
+                                <button class="qty-btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIZZA 2: PEPPERONI -->
+            <div class="pizza-card">
+                <div class="pizza-img-wrapper">
+                    <span class="pizza-badge">Çok Satan</span>
+                    <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=500&auto=format&fit=crop" alt="Pepperoni" class="pizza-img">
+                </div>
+                <div class="pizza-info">
+                    <div>
+                        <div class="pizza-title-row">
+                            <h3 class="pizza-title">Pepperoni</h3>
+                            <span class="pizza-price">220 TL</span>
+                        </div>
+                        <p class="pizza-desc">Bol dana pepperoni, mozzarella peyniri, kekik ve acı yağ dokunuşu ile harika bir uyum.</p>
+                    </div>
+                    <div class="pizza-options">
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="p2-kucuk" name="p2-boyut" value="Küçük" data-price="220" checked>
+                                <label for="p2-kucuk">Küçük</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p2-orta" name="p2-boyut" value="Orta" data-price="265">
+                                <label for="p2-orta">Orta</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p2-buyuk" name="p2-boyut" value="Büyük" data-price="310">
+                                <label for="p2-buyuk">Büyük</label>
+                            </div>
+                        </div>
+                        <div class="qty-order-row">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
+                                <button class="qty-btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIZZA 3: BBQ CHICKEN -->
+            <div class="pizza-card">
+                <div class="pizza-img-wrapper">
+                    <span class="pizza-badge">Gurme</span>
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=500&auto=format&fit=crop" alt="BBQ Chicken" class="pizza-img">
+                </div>
+                <div class="pizza-info">
+                    <div>
+                        <div class="pizza-title-row">
+                            <h3 class="pizza-title">BBQ Tavuklu</h3>
+                            <span class="pizza-price">210 TL</span>
+                        </div>
+                        <p class="pizza-desc">Tütsülenmiş tavuk göğsü, barbekü sos, karamelize soğan, mısır ve taze kişniş.</p>
+                    </div>
+                    <div class="pizza-options">
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="p3-kucuk" name="p3-boyut" value="Küçük" data-price="210" checked>
+                                <label for="p3-kucuk">Küçük</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p3-orta" name="p3-boyut" value="Orta" data-price="255">
+                                <label for="p3-orta">Orta</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p3-buyuk" name="p3-boyut" value="Büyük" data-price="300">
+                                <label for="p3-buyuk">Büyük</label>
+                            </div>
+                        </div>
+                        <div class="qty-order-row">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
+                                <button class="qty-btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIZZA 4: QUATTRO FORMAGGI -->
+            <div class="pizza-card">
+                <div class="pizza-img-wrapper">
+                    <span class="pizza-badge">Yoğun Lezzet</span>
+                    <img src="https://images.unsplash.com/photo-1573821663912-569905455b1c?q=80&w=500&auto=format&fit=crop" alt="4 Peynirli" class="pizza-img">
+                </div>
+                <div class="pizza-info">
+                    <div>
+                        <div class="pizza-title-row">
+                            <h3 class="pizza-title">4 Peynirli</h3>
+                            <span class="pizza-price">240 TL</span>
+                        </div>
+                        <p class="pizza-desc">Mozzarella, gorgonzola, parmesan ogüzel taze keçi peynirinin muazzam aromatik buluşması.</p>
+                    </div>
+                    <div class="pizza-options">
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="p4-kucuk" name="p4-boyut" value="Küçük" data-price="240" checked>
+                                <label for="p4-kucuk">Küçük</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p4-orta" name="p4-boyut" value="Orta" data-price="290">
+                                <label for="p4-orta">Orta</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p4-buyuk" name="p4-boyut" value="Büyük" data-price="340">
+                                <label for="p4-buyuk">Büyük</label>
+                            </div>
+                        </div>
+                        <div class="qty-order-row">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
+                                <button class="qty-btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIZZA 5: VEGETARIANA -->
+            <div class="pizza-card">
+                <div class="pizza-img-wrapper">
+                    <span class="pizza-badge">Fit & Sağlıklı</span>
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=500&auto=format&fit=crop" alt="Vegetarian" class="pizza-img">
+                </div>
+                <div class="pizza-info">
+                    <div>
+                        <div class="pizza-title-row">
+                            <h3 class="pizza-title">Vegetariana</h3>
+                            <span class="pizza-price">195 TL</span>
+                        </div>
+                        <p class="pizza-desc">Izgara enginar kalbi, köz biber, mantar, siyah zeytin, brokoli ve fesleğenli sos.</p>
+                    </div>
+                    <div class="pizza-options">
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="p5-kucuk" name="p5-boyut" value="Küçük" data-price="195" checked>
+                                <label for="p5-kucuk">Küçük</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p5-orta" name="p5-boyut" value="Orta" data-price="235">
+                                <label for="p5-orta">Orta</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p5-buyuk" name="p5-boyut" value="Büyük" data-price="280">
+                                <label for="p5-buyuk">Büyük</label>
+                            </div>
+                        </div>
+                        <div class="qty-order-row">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
+                                <button class="qty-btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIZZA 6: CAREA SPECIAL -->
+            <div class="pizza-card">
+                <div class="pizza-img-wrapper">
+                    <span class="pizza-badge" style="background-color: var(--primary); color: white;">Şefin Seçimi</span>
+                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=500&auto=format&fit=crop" alt="Carea Special" class="pizza-img">
+                </div>
+                <div class="pizza-info">
+                    <div>
+                        <div class="pizza-title-row">
+                            <h3 class="pizza-title">Carea Special</h3>
+                            <span class="pizza-price">265 TL</span>
+                        </div>
+                        <p class="pizza-desc">Füme kaburga eti, trüf yağı, yaban mantarları, roka ve özel Carea peynir harmanı.</p>
+                    </div>
+                    <div class="pizza-options">
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="p6-kucuk" name="p6-boyut" value="Küçük" data-price="265" checked>
+                                <label for="p6-kucuk">Küçük</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p6-orta" name="p6-boyut" value="Orta" data-price="320">
+                                <label for="p6-orta">Orta</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="p6-buyuk" name="p6-boyut" value="Büyük" data-price="375">
+                                <label for="p6-buyuk">Büyük</label>
+                            </div>
+                        </div>
+                        <div class="qty-order-row">
+                            <div class="quantity-selector">
+                                <button class="qty-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" readonly>
+                                <button class="qty-btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(this)">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SİPARİŞLERİM & SEPET ALANI -->
+    <section class="order-summary-section" id="orders">
+        <div class="summary-container">
+            
+            <!-- Sol Sütun: Sipariş Listesi -->
+            <div class="summary-box">
+                <h3>Siparişlerim (Sepetiniz)</h3>
+                <ul class="order-list" id="cart-list">
+                    <!-- JS Burayı dolduracak -->
+                </ul>
+            </div>
+
+            <!-- Sağ Sütun: Fiyatlandırma ve Tamamlama -->
+            <div class="summary-box checkout-side">
+                <div class="checkout-box">
+                    <div class="total-row">
+                        <span>Ara Toplam:</span>
+                        <span id="subtotal-price">0 TL</span>
+                    </div>
+                    <div class="total-row" style="font-size: 15px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">
+                        <span>Teslimat Ücreti:</span>
+                        <span style="color: var(--accent);" id="delivery-fee">Ücretsiz</span>
+                    </div>
+                    <div class="total-row" style="margin-top: 20px; color: var(--primary); font-size: 26px;">
+                        <span>Genel Toplam:</span>
+                        <span id="total-price">0 TL</span>
+                    </div>
+                    <button class="complete-order-btn" onclick="completeOrder()">Siparişi Tamamla</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- İLETİŞİM SECTION (YENİ EKLENEN KISIM) -->
+    <section class="contact-section" id="contact">
+        <div class="section-title">
+            <h2>İletişim & Lokasyon</h2>
+            <p>Bizimle iletişime geçin, sıcacık lezzeti kaçırmayın.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Kart 1: İletişim Bilgileri -->
+            <div class="contact-card">
+                <h3>📞 Merkezimiz</h3>
+                <p><strong>Telefon:</strong> +90 (216) 555 0 343</p>
+                <p><strong>E-Posta:</strong> info@careapizza.com</p>
+                <p><strong>Adres:</strong> Caferağa Mah. Lezzet Sokak, No: 34/A Kadıköy / İstanbul</p>
+            </div>
+
+            <!-- Kart 2: Çalışma Saatleri -->
+            <div class="contact-card">
+                <h3>⏰ Çalışma Saatleri</h3>
+                <p><strong>Hafta İçi:</strong> 11:30 - 23:00</p>
+                <p><strong>Hafta Sonu:</strong> 11:30 - 01:00</p>
+                <p style="color: var(--primary); font-size: 13px; margin-top: 15px; font-weight: 500;">* Paket servisimiz kapanış saatine kadar devam etmektedir.</p>
+            </div>
+
+            <!-- Kart 3: Sosyal Medya -->
+            <div class="contact-card">
+                <h3>🌐 Sosyal Medya</h3>
+                <p>Kampanyalarımızdan, indirim kuponlarımızdan ve yeni şef tabaklarımızdan anında haberdar olmak için bizi takip edin.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">YT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; Web Editörü Dersi İçin Hazırlanmış Bir Web Sitedir.</p>
+    </footer>
+
+    <!-- JAVASCRIPT KODLARI -->
+    <script>
+        let cart = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Boyut değişiminde fiyat güncelleme dinleyicisi
+            const sizeRadios = document.querySelectorAll('.size-option input');
+            
+            sizeRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const card = e.target.closest('.pizza-card');
+                    const priceSpan = card.querySelector('.pizza-price');
+                    const newPrice = e.target.getAttribute('data-price');
+                    priceSpan.textContent = newPrice + ' TL';
+                });
+            });
+
+            updateCartUI();
+        });
+
+        function addToCart(button) {
+            const card = button.closest('.pizza-card');
+            const name = card.querySelector('.pizza-title').textContent;
+            const checkedRadio = card.querySelector('.size-option input:checked');
+            const size = checkedRadio.value;
+            const price = parseInt(checkedRadio.getAttribute('data-price'));
+            const qtyInput = card.querySelector('.qty-input');
+            const qty = parseInt(qtyInput.value);
+
+            const existingItem = cart.find(item => item.name === name && item.size === size);
+
+            if (existingItem) {
+                existingItem.qty += qty;
+            } else {
+                cart.push({ name, size, price, qty });
+            }
+
+            updateCartUI();
+
+            button.textContent = "Eklendi! ✓";
+            button.classList.add('added');
+            qtyInput.value = 1;
+
+            setTimeout(() => {
+                button.textContent = "Ekle";
+                button.classList.remove('added');
+            }, 1500);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartList = document.getElementById('cart-list');
+            const subtotalSpan = document.getElementById('subtotal-price');
+            const totalSpan = document.getElementById('total-price');
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `<li class="order-item"><p style="color: var(--text-muted); font-size:15px;">Sepetiniz henüz boş. Menüden dilediğiniz lezzetleri ekleyebilirsiniz!</p></li>`;
+                subtotalSpan.textContent = '0 TL';
+                totalSpan.textContent = '0 TL';
+                return;
+            }
+
+            cartList.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+
+                const li = document.createElement('li');
+                li.className = 'order-item';
+                li.innerHTML = `
+                    <div class="order-item-details">
+                        <h4>${item.name}</h4>
+                        <p>Boyut: ${item.size} | Adet: ${item.qty}</p>
+                    </div>
+                    <div class="order-item-right">
+                        <span class="order-item-price">${itemTotal} TL</span>
+                        <button class="remove-item-btn" onclick="removeFromCart(${index})">&times;</button>
+                    </div>
+                `;
+                cartList.appendChild(li);
+            });
+
+            subtotalSpan.textContent = total + ' TL';
+            totalSpan.textContent = total + ' TL';
+        }
+
+        function completeOrder() {
+            if (cart.length === 0) {
+                alert("Sepetiniz boş! Lütfen önce menüden pizza ekleyin.");
+            } else {
+                alert("Siparişiniz başarıyla alındı! Carea Pizza'yı tercih ettiğiniz için teşekkür ederiz.");
+                cart = [];
+                updateCartUI();
+            }
+        }
+    </script>
+</body>
+</html>
